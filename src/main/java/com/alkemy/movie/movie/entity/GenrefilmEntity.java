@@ -9,13 +9,13 @@ import javax.persistence.*;
 @Table(name = "genrefilm")
 @Getter
 @Setter
-public class genrefilmEntity {
+public class GenrefilmEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long Id;
+    private Long id;
 
-    private String Name;
+    private String name_genre;
 
-    private String image;
+    private String image_genre;
 
 }

@@ -2,7 +2,6 @@ package com.alkemy.movie.movie.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -14,22 +13,25 @@ import java.util.Set;
 @Table(name = "movieseries")
 @Getter
 @Setter
-public class movieseriesEntity {
+public class MovieseriesEntity {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String image;
+    private String image_movieseries;
 
-    @Column(name = "fecha_creacion")
+    @Column(name = "created_date")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private LocalDate fechaCreacion;
+    private LocalDate createdDate;
 
     private Byte rating;
 
+    @Column(name = "type_movie_serie")
+    private String typeMovieOrSerie;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "genrefilm_id", insertable = false, updatable = false)
-    private genrefilmEntity genrefilm;
+    private GenrefilmEntity genrefilm;
 
     @Column(name = "genrefilm_id", nullable = false)
     private Long genrefilmId;
@@ -43,5 +45,17 @@ public class movieseriesEntity {
             name = "character_movieseries",
             joinColumns = @JoinColumn(name= "movieseries_id"),
             inverseJoinColumns = @JoinColumn(name="character_id"))
-    private Set<characterEntity> characters = new HashSet<>();
+    private Set<CharacterEntity> charactersFilm = new HashSet<>();
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MovieseriesEntity other = (MovieseriesEntity) obj;
+        return other.id == this.id;
+    }
 }
