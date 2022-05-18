@@ -20,6 +20,8 @@ public class MovieseriesEntity {
 
     private String image_movieseries;
 
+    private String title;
+
     @Column(name = "created_date")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate createdDate;
